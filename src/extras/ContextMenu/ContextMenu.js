@@ -613,7 +613,7 @@ class ContextMenu {
         const html = [];
 
         html.push('<div class="xeokit-context-menu ' + menu.id + '" style="z-index:300000; position: absolute;">');
-
+        html.push('<div class="header-xeokit-context-menu"> <p>Menu</p> <p id="closeMenu' + menu.id + '" class="close-xeokit-context-menu">X</p> </div>');
         html.push('<ul>');
 
         if (groups) {
@@ -668,6 +668,11 @@ class ContextMenu {
 
         menu.menuElement = menuElement;
 
+        const closeMenuElement = document.getElementById(`closeMenu${menu.id}`);
+        closeMenuElement.addEventListener('click', () => {
+            menuElement.style.display = 'none';
+        });
+        
         menuElement.style["border-radius"] = 4 + "px";
         menuElement.style.display = 'none';
         menuElement.style["z-index"] = 300000;

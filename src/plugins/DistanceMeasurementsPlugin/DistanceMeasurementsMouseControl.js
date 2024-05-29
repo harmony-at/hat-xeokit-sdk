@@ -107,10 +107,14 @@ export class DistanceMeasurementsMouseControl extends DistanceMeasurementsContro
     }
 
     _destroyMarkerDiv() {
-        if (this._markerDiv) {
-            const element = document.getElementById('myMarkerDiv')
-            element.parentNode.removeChild(element)
-            this._markerDiv = null
+        try {
+            if (this._markerDiv) {
+                const element = document.getElementById('myMarkerDiv')
+                element.parentNode.removeChild(element)
+                this._markerDiv = null
+            }
+        } catch {
+            return;
         }
     }
 
