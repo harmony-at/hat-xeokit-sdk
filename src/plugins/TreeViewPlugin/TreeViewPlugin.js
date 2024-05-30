@@ -814,8 +814,12 @@ export class TreeViewPlugin extends Plugin {
         }
     
         // Cập nhật trạng thái của switch
-        const switchInput = document.querySelector('.xeokit-check-loadAllObjects');
-        switchInput.checked = allChecked;
+        const switchInputObj = document.querySelector('.xeokit-check-loadAllObjects');
+        const switchInputCls = document.querySelector('.xeokit-check-loadAllClasses');
+        const switchInputStr = document.querySelector('.xeokit-check-loadAllStoreys');
+        switchInputObj.checked = allChecked;
+        switchInputCls.checked = allChecked;
+        switchInputStr.checked = allChecked;
     }
 
     /**
