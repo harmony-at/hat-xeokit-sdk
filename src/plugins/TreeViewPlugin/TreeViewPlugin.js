@@ -542,6 +542,7 @@ export class TreeViewPlugin extends Plugin {
                 parent = parent.parent;
             }
             this._muteSceneEvents = false;
+            this.updateSwitchState();
         };
 
         this._hierarchy = cfg.hierarchy || "containment";
@@ -798,6 +799,23 @@ export class TreeViewPlugin extends Plugin {
         for (let i = 0, len = children.length; i < len; i++) {
             this.withNodeTree(children[i], callback);
         }
+    }
+
+    updateSwitchState() {
+        let allChecked = true;
+    
+        // Kiểm tra tất cả các nút trong cây
+        for (const nodeId in this._nodeNodes) {
+            const node = this._nodeNodes[nodeId];
+            if (!node.checked) {
+                allChecked = false;
+                break;
+            }
+        }
+    
+        // Cập nhật trạng thái của switch
+        const switchInput = document.querySelector('.xeokit-check-loadAllObjects');
+        switchInput.checked = allChecked;
     }
 
     /**
@@ -1288,6 +1306,7 @@ export class TreeViewPlugin extends Plugin {
                 }
             }
         }
+        this.updateSwitchState();
     }
 
     _withNodeTree(node, callback) {
