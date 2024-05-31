@@ -1003,8 +1003,8 @@ export class TreeViewPlugin extends Plugin {
                 parent: null,
                 numEntities: 0,
                 numVisibleEntities: 0,
-                checked: false,
-                xrayed: false,
+                checked: true,
+                xrayed: true,
                 children: []
             };
             this._rootNodes.push(buildingNode);
@@ -1023,8 +1023,8 @@ export class TreeViewPlugin extends Plugin {
                 parent: buildingNode,
                 numEntities: 0,
                 numVisibleEntities: 0,
-                checked: false,
-                xrayed: false,
+                checked: true,
+                xrayed: true,
                 children: []
             };
             buildingNode.children.push(storeyNode);
