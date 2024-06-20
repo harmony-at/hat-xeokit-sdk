@@ -457,12 +457,14 @@ class ContextMenu {
         if (this._shown) {
             return;
         }
-        this._hideAllMenus();
-        this._updateItemsTitles();
-        this._updateItemsEnabledStatus();
-        this._showMenu(this._rootMenu.id, pageX, pageY);
-        this._shown = true;
-        this.fire("shown", {});
+        if (this._rootMenu && this._rootMenu.id) {
+            this._hideAllMenus();
+            this._updateItemsTitles();
+            this._updateItemsEnabledStatus();
+            this._showMenu(this._rootMenu.id, pageX, pageY);
+            this._shown = true;
+            this.fire("shown", {});
+        }
     }
 
     /**

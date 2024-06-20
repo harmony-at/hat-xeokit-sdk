@@ -255,9 +255,13 @@ class GLTFLoaderPlugin extends Plugin {
      */
     load(params = {}) {
 
-        if (params.id && this.viewer.scene.components[params.id]) {
-            this.error("Component with this ID already exists in viewer: " + params.id + " - will autogenerate this ID");
-            delete params.id;
+        try {
+            if (params.id && this.viewer.scene.components[params.id]) {
+                this.error("Component with this ID already exists in viewer: " + params.id + " - will autogenerate this ID");
+                delete params.id;
+            }
+        } catch {
+            return;
         }
 
         const sceneModel = new SceneModel(this.viewer.scene, utils.apply(params, {

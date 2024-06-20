@@ -1526,7 +1526,9 @@ class Scene extends Component {
                 this._compilables[id].compile();
             }
         }
-        this._renderer.shadowsDirty();
+        try {
+            this._renderer.shadowsDirty();
+        } catch {return}
         this.fire("compile", this, true);
     }
 
@@ -2282,9 +2284,13 @@ class Scene extends Component {
      */
     pick(params, pickResult) {
 
-        if (this.canvas.boundary[2] === 0 || this.canvas.boundary[3] === 0) {
-            this.error("Picking not allowed while canvas has zero width or height");
-            return null;
+        try {
+            if (this.canvas.boundary[2] === 0 || this.canvas.boundary[3] === 0) {
+                this.error("Picking not allowed while canvas has zero width or height");
+                return null;
+            }
+        } catch {
+            return;
         }
 
         params = params || {};
