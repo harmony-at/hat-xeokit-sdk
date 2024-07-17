@@ -25,14 +25,14 @@ class Dot {
         dotStyle.background = "lightgreen";
         dotStyle.position = "absolute";
         dotStyle["z-index"] = cfg.zIndex === undefined ? "40000005" : cfg.zIndex ;
-        dotStyle.width = 8 + "px";
-        dotStyle.height = 8 + "px";
+        dotStyle.width = cfg.isIssue ? 18 + 'px' : 8 + 'px';
+        dotStyle.height = cfg.isIssue ? 18 + 'px' : 8 + 'px';
         dotStyle.visibility = cfg.visible !== false ? "visible" : "hidden";
         dotStyle.top = 0 + "px";
         dotStyle.left = 0 + "px";
         dotStyle["box-shadow"] = "0 2px 5px 0 #182A3D;";
         dotStyle["opacity"] = 1.0;
-        dotStyle["pointer-events"] = "none";
+        dotStyle['pointer-events'] = cfg.isIssue ? 'auto' : 'none';
         if (cfg.onContextMenu) {
           //  dotStyle["cursor"] = "context-menu";
         }
@@ -59,6 +59,19 @@ class Dot {
         dotClickable.addEventListener('click', (event) => {
             parentElement.dispatchEvent(new MouseEvent('mouseover', event));
         });
+
+        if (cfg.isIssue) {
+            dot.addEventListener('click', (event) => {
+              console.log('click');
+              cfg.getId();
+              parentElement.dispatchEvent(new MouseEvent('mouseover', event));
+            });
+            dot.addEventListener('mousemove', (event) => {
+              console.log('mousemove');
+              cfg.onMouseMove(event);
+              parentElement.dispatchEvent(new MouseEvent('mouseover', event));
+            });
+        }
 
         if (cfg.onMouseOver) {
             dotClickable.addEventListener('mouseover', (event) => {
