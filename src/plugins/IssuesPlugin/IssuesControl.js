@@ -7,16 +7,14 @@ import {Component} from "../../viewer/scene/Component.js";
  * @abstract
  */
 export class IssuesControl extends Component {
-
     /**
      * Gets if this IssuesControl is currently active, where it is responding to input.
      *
      * @returns {boolean} True if this IssuesControl is active.
      * @abstract
      */
-    get active() {
-    }
-
+    get active() {}
+  
     /**
      * Sets whether snap-to-vertex and snap-to-edge are enabled for this IssuesControl.
      *
@@ -28,9 +26,8 @@ export class IssuesControl extends Component {
      *
      * @param {boolean} snapping Whether to enable snap-to-vertex and snap-edge for this IssuesControl.
      */
-    set snapping(snapping) {
-    }
-
+    set snapping(snapping) {}
+  
     /**
      * Gets whether snap-to-vertex and snap-to-edge are enabled for this IssuesControl.
      *
@@ -39,17 +36,16 @@ export class IssuesControl extends Component {
      * @returns {boolean} Whether snap-to-vertex and snap-to-edge are enabled for this IssuesControl.
      */
     get snapping() {
-        return true;
+      return true;
     }
-
+  
     /**
      * Activates this IssuesControl, ready to respond to input.
      *
      * @abstract
      */
-    activate() {
-    }
-
+    activate() {}
+  
     /**
      * Deactivates this IssuesControl, making it unresponsive to input.
      *
@@ -57,9 +53,8 @@ export class IssuesControl extends Component {
      *
      * @abstract
      */
-    deactivate() {
-    }
-
+    deactivate() {}
+  
     /**
      * Resets this IssuesControl.
      *
@@ -69,9 +64,8 @@ export class IssuesControl extends Component {
      *
      * @abstract
      */
-    reset() {
-    }
-
+    reset() {}
+  
     /**
      * Gets the {@link DistanceMeasurement} under construction by this IssuesControl, if any.
      *
@@ -80,9 +74,9 @@ export class IssuesControl extends Component {
      * @abstract
      */
     get currentMeasurement() {
-        return null;
+      return null;
     }
-
+  
     /**
      * Destroys this IssuesControl.
      *
@@ -90,6 +84,5 @@ export class IssuesControl extends Component {
      *
      * @abstract
      */
-    destroy() {
-    }
-}
+    destroy() {}
+  }
