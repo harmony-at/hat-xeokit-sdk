@@ -1,6 +1,7 @@
 import {Plugin} from "../../viewer/Plugin.js";
 import {Issues} from "./Issues.js";
 import {IssuesControl} from "./IssuesControl.js";
+import { Marker } from "../../viewer/index.js";
 
 class IssuesPlugin extends Plugin {
     constructor(viewer, cfg = {}) {
@@ -132,50 +133,62 @@ class IssuesPlugin extends Plugin {
     }
   
     createIssue(params = {}) {
-      // if (this._issues[params.id]) {
-      //   console.warn('Issue with this ID already exists:', params.id);
-      //   return null;
-      // }
-  
-      const origin = params.origin;
-      const target = params.target;
-      const issue = new Issues(this, {
-        id: params.id,
-        container: this._container, // Chứa canvas hoặc container chứa
-        // origin: params.origin || [0, 0, 0],
-        color: params.color || '#FF0000', // màu mặc định nếu không có
-        onMouseOver: params.onMouseOver,
-        onMouseLeave: params.onMouseLeave,
-        onContextMenu: params.onContextMenu,
-        visible: params.visible,
-        issueVisible: params.issueVisible,
-        origin: {
-          entity: origin.entity,
-          worldPos: origin.worldPos,
-        },
-        target: {
-          entity: target.entity,
-          worldPos: target.worldPos,
-        },
-        triggerIssueState: this._triggerIssueState,
-      });
-  
-      if (params.isZoom) {
-        const offset = [10, 10, 10];
-        const eyePos = [
-          issue._issueWorld[0] + offset[0],
-          issue._issueWorld[1] + offset[1],
-          issue._issueWorld[2] + offset[2],
-        ];
-        this.viewer.camera.look = issue._issueWorld;
-        this.viewer.camera.eye = eyePos;
+        if (this._issues[params.id]) {
+          const IssueMarker = new Marker(this.viewer.scene, params.origin);
+          const IssueWorld = math.vec3();
+          IssueMarker.on('worldPos', (value) => {
+            IssueWorld.set(value || [0, 0, 0]);
+          });
+          const offset = [10, 10, 10];
+          const eyePos = [
+            IssueWorld[0] + offset[0],
+            IssueWorld[1] + offset[1],
+            IssueWorld[2] + offset[2],
+          ];
+          this.viewer.camera.look = IssueWorld;
+          this.viewer.camera.eye = eyePos;
+          return;
+        }
+    
+        const origin = params.origin;
+        const target = params.target;
+        const issue = new Issues(this, {
+          id: params.id,
+          container: this._container, // Chứa canvas hoặc container chứa
+          color: params.color || '#FF0000', // màu mặc định nếu không có
+          onMouseOver: params.onMouseOver,
+          onMouseLeave: params.onMouseLeave,
+          onContextMenu: params.onContextMenu,
+          visible: params.visible,
+          issueVisible: params.issueVisible,
+          origin: {
+            entity: origin.entity,
+            worldPos: origin.worldPos,
+          },
+          target: {
+            entity: target.entity,
+            worldPos: target.worldPos,
+          },
+          triggerIssueState: this._triggerIssueState,
+        });
+    
+        if (params.isZoom) {
+          const offset = [10, 10, 10];
+          const eyePos = [
+            issue._issueWorld[0] + offset[0],
+            issue._issueWorld[1] + offset[1],
+            issue._issueWorld[2] + offset[2],
+          ];
+          this.viewer.camera.look = issue._issueWorld;
+          this.viewer.camera.eye = eyePos;
+        }
+    
+        this._issues[params.id] = issue;
+    
+        this.fire('issueCreated', issue);
+    
+        return issue;
       }
-      this._issues[params.id] = issue;
-  
-      this.fire('issueCreated', issue);
-  
-      return issue;
-    }
   
     loadIssue(value) {
       // const origin = value.data;
