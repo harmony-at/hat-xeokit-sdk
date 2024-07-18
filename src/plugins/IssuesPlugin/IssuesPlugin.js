@@ -2,6 +2,7 @@ import {Plugin} from "../../viewer/Plugin.js";
 import {Issues} from "./Issues.js";
 import {IssuesControl} from "./IssuesControl.js";
 import { Marker } from "../../viewer/index.js";
+import { math } from "../../viewer/index.js";
 
 class IssuesPlugin extends Plugin {
     constructor(viewer, cfg = {}) {
