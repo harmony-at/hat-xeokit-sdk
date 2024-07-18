@@ -101,7 +101,7 @@ class IssuesPlugin extends Plugin {
      *
      * @type {{String:Issues}}
      */
-    get measurements() {
+    get issues() {
       return this._issues;
     }
   
@@ -211,14 +211,14 @@ class IssuesPlugin extends Plugin {
     }
   
     deleteIssue(id) {
-      const issue = this._issues[id];
-      if (!issue) {
-        this.log('Issue not found: ' + id);
-        return;
-      }
-      issue.destroy();
-      delete this._issues[id];
-      this.fire('issueDestroyed', issue);
+        const issue = this._issues[id];
+        if (!issue) {
+          this.log('Issue not found: ' + id);
+          return;
+        }
+        issue.destroy();
+        delete this._issues[id];
+        this.fire('issueDestroyed', issue);
     }
   
     /**
@@ -274,7 +274,7 @@ class IssuesPlugin extends Plugin {
     clear() {
       const ids = Object.keys(this._issues);
       for (var i = 0, len = ids.length; i < len; i++) {
-        this.destroyIssue(ids[i]);
+        this.deleteIssue(ids[i]);
       }
     }
   
