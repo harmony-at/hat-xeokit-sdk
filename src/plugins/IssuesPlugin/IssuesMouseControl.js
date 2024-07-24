@@ -240,6 +240,7 @@ export class IssuesMouseControl extends IssuesControl {
       canvas.addEventListener(
         'mouseup',
         (this._onMouseUp = (e) => {
+          if (!hoveredEntity) return;
           if (e.which !== 1) {
             return;
           }
