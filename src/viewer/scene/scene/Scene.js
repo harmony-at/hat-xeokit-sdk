@@ -887,7 +887,7 @@ class Scene extends Component {
         // Default lights
 
         new AmbientLight(this, {
-            color: [0.5, 0.5, 0.5],
+            color: [0.3, 0.3, 0.3],
             intensity: 0.7
         });
 
