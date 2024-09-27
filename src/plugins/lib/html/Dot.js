@@ -11,6 +11,7 @@ class Dot {
 
         this._dot = document.createElement('div');
         this._dot.className += this._dot.className ? ' viewer-ruler-dot' : 'viewer-ruler-dot';
+        this._dot.id += cfg.id || '';
 
         this._dotClickable = document.createElement('div');
         this._dotClickable.className += this._dotClickable.className ? ' viewer-ruler-dot-clickable' : 'viewer-ruler-dot-clickable';

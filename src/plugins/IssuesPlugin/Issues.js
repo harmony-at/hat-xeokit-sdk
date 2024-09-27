@@ -110,6 +110,7 @@ class Issues extends Component {
         width: 18,
         height: 18,
         isIssue: true,
+        id: cfg.id,
       });
   
       this._wpDirty = false;
