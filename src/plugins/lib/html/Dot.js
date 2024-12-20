@@ -52,6 +52,22 @@ class Dot {
         dotClickableStyle.left = 0 + "px";
         dotClickableStyle["opacity"] = 0.0;
         dotClickableStyle["pointer-events"] = "none";
+        //themmoi2012
+        this.origin = cfg.origin || new Float64Array(3);
+
+        this._tooltip = document.createElement('div');
+        this._tooltip.className = 'tooltip';
+        this._tooltip.style.position = 'absolute';
+        this._tooltip.style.backgroundColor = 'white';
+        this._tooltip.style.border = '1px solid #ccc';
+        this._tooltip.style.borderRadius = '5px';
+        this._tooltip.style.padding = '5px';
+        this._tooltip.style.visibility = 'hidden';
+        this._tooltip.style.fontSize = '13px';
+        parentElement.appendChild(this._tooltip);
+
+        dot.addEventListener('mouseenter', this.showTooltip.bind(this));
+        dot.addEventListener('mouseleave', this.hideTooltip.bind(this));
         if (cfg.onContextMenu) {
           //  dotClickableStyle["cursor"] = "context-menu";
         }
@@ -153,6 +169,18 @@ class Dot {
         this.setPos(cfg.x || 0, cfg.y || 0);
         this.setFillColor(cfg.fillColor);
         this.setBorderColor(cfg.borderColor);
+    }
+
+    //themmoi2012
+    showTooltip(event) {
+        this._tooltip.innerHTML = `x: ${this.origin[0].toFixed(2)}m | y:${-1*this.origin[2].toFixed(2)}m | z: ${this.origin[1].toFixed(2)}m`;
+        this._tooltip.style.left = event.clientX + 'px';
+        this._tooltip.style.top = event.clientY + 'px';
+        this._tooltip.style.visibility = 'visible';
+      }
+    
+    hideTooltip() {
+    this._tooltip.style.visibility = 'hidden';
     }
 
     setPos(x, y) {

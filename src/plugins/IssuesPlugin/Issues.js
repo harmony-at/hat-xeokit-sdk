@@ -111,6 +111,8 @@ class Issues extends Component {
         height: 18,
         isIssue: true,
         id: cfg.id,
+        //themmoi2012
+        origin: cfg?.origin.worldPos
       });
   
       this._wpDirty = false;
