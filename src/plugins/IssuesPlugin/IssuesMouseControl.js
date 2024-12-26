@@ -338,7 +338,8 @@ export class IssuesMouseControl extends IssuesControl {
     }
   
     //themmoi37
-    loadIssue(data) {
+    //themmoi2612
+    loadIssue(data, isPoint) {
       const entity = this.plugin.viewer.scene.objects[data.entityId];
       this.plugin.loadIssue({
         data: data,
@@ -346,6 +347,7 @@ export class IssuesMouseControl extends IssuesControl {
         id: data.id,
         color: data.color,
         isZoom: data.isZoom,
+        isPoint: isPoint,
       });
     }
   
