@@ -171,6 +171,8 @@ class IssuesPlugin extends Plugin {
             worldPos: target.worldPos,
           },
           triggerIssueState: this._triggerIssueState,
+          //themmoi2612
+          isPoint: params.isPoint,
         });
     
         if (params.isZoom) {
@@ -208,6 +210,8 @@ class IssuesPlugin extends Plugin {
         id: value.id,
         color: value.color,
         isZoom: value.isZoom,
+        //themmoi2612
+        isPoint: value.isPoint,
       });
     }
   
