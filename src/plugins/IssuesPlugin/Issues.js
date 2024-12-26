@@ -112,7 +112,9 @@ class Issues extends Component {
         isIssue: true,
         id: cfg.id,
         //themmoi2012
-        origin: cfg?.origin.worldPos
+        origin: cfg?.origin.worldPos,
+        //themmoi2612
+        isPoint: cfg?.isPoint
       });
   
       this._wpDirty = false;

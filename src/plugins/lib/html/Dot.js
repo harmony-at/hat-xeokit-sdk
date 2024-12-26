@@ -53,21 +53,24 @@ class Dot {
         dotClickableStyle["opacity"] = 0.0;
         dotClickableStyle["pointer-events"] = "none";
         //themmoi2012
-        this.origin = cfg.origin || new Float64Array(3);
-
-        this._tooltip = document.createElement('div');
-        this._tooltip.className = 'tooltip';
-        this._tooltip.style.position = 'absolute';
-        this._tooltip.style.backgroundColor = 'white';
-        this._tooltip.style.border = '1px solid #ccc';
-        this._tooltip.style.borderRadius = '5px';
-        this._tooltip.style.padding = '5px';
-        this._tooltip.style.visibility = 'hidden';
-        this._tooltip.style.fontSize = '13px';
-        parentElement.appendChild(this._tooltip);
-
-        dot.addEventListener('mouseenter', this.showTooltip.bind(this));
-        dot.addEventListener('mouseleave', this.hideTooltip.bind(this));
+        //themmoi2612
+        if(cfg.isPoint) {
+            this.origin = cfg.origin || new Float64Array(3);
+    
+            this._tooltip = document.createElement('div');
+            this._tooltip.className = 'tooltip';
+            this._tooltip.style.position = 'absolute';
+            this._tooltip.style.backgroundColor = 'white';
+            this._tooltip.style.border = '1px solid #ccc';
+            this._tooltip.style.borderRadius = '5px';
+            this._tooltip.style.padding = '5px';
+            this._tooltip.style.visibility = 'hidden';
+            this._tooltip.style.fontSize = '13px';
+            parentElement.appendChild(this._tooltip);
+    
+            dot.addEventListener('mouseenter', this.showTooltip.bind(this));
+            dot.addEventListener('mouseleave', this.hideTooltip.bind(this));
+        }
         if (cfg.onContextMenu) {
           //  dotClickableStyle["cursor"] = "context-menu";
         }

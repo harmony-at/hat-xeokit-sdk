@@ -136,7 +136,7 @@ export class IssuesMouseControl extends IssuesControl {
     /**
      * Activates this IssuesMouseControl, ready to respond to input.
      */
-    activate(done) {
+    activate(done, isPoint) {
       if (this._active) {
         return;
       }
@@ -264,6 +264,8 @@ export class IssuesMouseControl extends IssuesControl {
               entity: hoveredEntity,
             },
             approximate: true,
+            //themmoi2612
+            isPoint: isPoint,
           });
           this._currentIssue.clickable = false;
           const id = hoveredEntity?.id;
